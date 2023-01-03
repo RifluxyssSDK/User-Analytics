@@ -17,9 +17,7 @@ public class MainActivity extends AppCompatActivity {
         Analytics.init(getApplicationContext(),3);
 
         for (int i = 1; i <= 5; i++) {
-
             Analytics.insertLog(new Schema("userID","hostID","locationNumber",100.8957,"log","eventNBR","assDES",123));
-
         }
 
         Log.i("TAG", "onCreate: ");
