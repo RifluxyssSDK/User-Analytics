@@ -19,232 +19,103 @@ public class Schema {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    @ColumnInfo(name = "UserId")
-    private String usedId;
+    @ColumnInfo(name = "User Id")
+    private final String userId;
 
-    @ColumnInfo(name = "HostId")
-    private String hostId;
+    @ColumnInfo(name = "Host Id")
+    private final String hostId;
 
-    @ColumnInfo(name = "RouteNbr")
-    private Double routeNbr;
+    @ColumnInfo(name = "Route Number")
+    private final Double routeNumber;
 
     @ColumnInfo(name = "Logger")
-    private String logger;
+    private final String logger;
 
-    @ColumnInfo(name = "EventNbr")
-    private String eventNbr;
+    @ColumnInfo(name = "Event Number")
+    private final String eventNumber;
 
-    @ColumnInfo(name = "AddtlDesc")
-    private String addtlDesc;
+    @ColumnInfo(name = "Additional Description")
+    private final String additionalDescription;
 
-    @ColumnInfo(name = "AddtlNbr")
-    private String addtlNbr;
+    @ColumnInfo(name = "Additional Number")
+    private final String additionalNumber;
 
-    @ColumnInfo(name = "DeviceID")
-    private String deviceId = Settings.Secure.getString(Instance.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+    @ColumnInfo(name = "Device ID")
+    private String deviceId = Settings.Secure.getString(Instance.getInstance().getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
-    @ColumnInfo(name = "Log ExpiryDate")
-    private String expiryDate = Util.getDate(Instance.getLogExpireDayCount());
-
+    @ColumnInfo(name = "Log Entry Date")
+    private String logEntryDate = Util.getDate(0);
 
     /**
      * Instantiates a new Schema.
      *
-     * @param usedId    the used id
-     * @param hostId    the host id
-     * @param routeNbr  the route nbr
-     * @param logger    the logger
-     * @param eventNbr  the event nbr
-     * @param addtlDesc the addtl desc
-     * @param addtlNbr  the addtl nbr
+     * @param userId                the user id
+     * @param hostId                the host id
+     * @param routeNumber           the route number
+     * @param logger                the logger
+     * @param eventNumber           the event number
+     * @param additionalDescription the additional description
+     * @param additionalNumber      the additional number
      */
-    public Schema(String usedId, String hostId, Double routeNbr, String logger, String eventNbr, String addtlDesc, String addtlNbr) {
-        this.usedId = usedId;
+    public Schema(String userId, String hostId, Double routeNumber, String logger, String eventNumber, String additionalDescription, String additionalNumber) {
+        this.userId = userId;
         this.hostId = hostId;
-        this.routeNbr = routeNbr;
+        this.routeNumber = routeNumber;
         this.logger = logger;
-        this.eventNbr = eventNbr;
-        this.addtlDesc = addtlDesc;
-        this.addtlNbr = addtlNbr;
+        this.eventNumber = eventNumber;
+        this.additionalDescription = additionalDescription;
+        this.additionalNumber = additionalNumber;
     }
 
-    /**
-     * Gets id.
-     *
-     * @return the id
-     */
     public int getId() {
         return id;
     }
 
-    /**
-     * Sets id.
-     *
-     * @param id the id
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * Gets used id.
-     *
-     * @return the used id
-     */
-    public String getUsedId() {
-        return usedId;
+    public String getUserId() {
+        return userId;
     }
 
-    /**
-     * Sets used id.
-     *
-     * @param usedId the used id
-     */
-    public void setUsedId(String usedId) {
-        this.usedId = usedId;
-    }
-
-    /**
-     * Gets host id.
-     *
-     * @return the host id
-     */
     public String getHostId() {
         return hostId;
     }
 
-    /**
-     * Sets host id.
-     *
-     * @param hostId the host id
-     */
-    public void setHostId(String hostId) {
-        this.hostId = hostId;
+    public Double getRouteNumber() {
+        return routeNumber;
     }
 
-    /**
-     * Gets route nbr.
-     *
-     * @return the route nbr
-     */
-    public Double getRouteNbr() {
-        return routeNbr;
-    }
-
-    /**
-     * Sets route nbr.
-     *
-     * @param routeNbr the route nbr
-     */
-    public void setRouteNbr(Double routeNbr) {
-        this.routeNbr = routeNbr;
-    }
-
-    /**
-     * Gets logger.
-     *
-     * @return the logger
-     */
     public String getLogger() {
         return logger;
     }
 
-    /**
-     * Sets logger.
-     *
-     * @param logger the logger
-     */
-    public void setLogger(String logger) {
-        this.logger = logger;
+    public String getEventNumber() {
+        return eventNumber;
     }
 
-    /**
-     * Gets event nbr.
-     *
-     * @return the event nbr
-     */
-    public String getEventNbr() {
-        return eventNbr;
+    public String getAdditionalDescription() {
+        return additionalDescription;
     }
 
-    /**
-     * Sets event nbr.
-     *
-     * @param eventNbr the event nbr
-     */
-    public void setEventNbr(String eventNbr) {
-        this.eventNbr = eventNbr;
+    public String getAdditionalNumber() {
+        return additionalNumber;
     }
 
-    /**
-     * Gets addtl desc.
-     *
-     * @return the addtl desc
-     */
-    public String getAddtlDesc() {
-        return addtlDesc;
-    }
-
-    /**
-     * Sets addtl desc.
-     *
-     * @param addtlDesc the addtl desc
-     */
-    public void setAddtlDesc(String addtlDesc) {
-        this.addtlDesc = addtlDesc;
-    }
-
-    /**
-     * Gets addtl nbr.
-     *
-     * @return the addtl nbr
-     */
-    public String getAddtlNbr() {
-        return addtlNbr;
-    }
-
-    /**
-     * Sets addtl nbr.
-     *
-     * @param addtlNbr the addtl nbr
-     */
-    public void setAddtlNbr(String addtlNbr) {
-        this.addtlNbr = addtlNbr;
-    }
-
-    /**
-     * Gets device id.
-     *
-     * @return the device id
-     */
     public String getDeviceId() {
         return deviceId;
     }
 
-    /**
-     * Sets device id.
-     *
-     * @param deviceId the device id
-     */
+    public String getLogEntryDate() {
+        return logEntryDate;
+    }
+
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
     }
 
-    /**
-     * Gets expiry date.
-     *
-     * @return the expiry date
-     */
-    public String getExpiryDate() {
-        return expiryDate;
-    }
-
-    /**
-     * Sets expiry date.
-     *
-     * @param expiryDate the expiry date
-     */
-    public void setExpiryDate(String expiryDate) {
-        this.expiryDate = expiryDate;
+    public void setLogEntryDate(String logEntryDate) {
+        this.logEntryDate = logEntryDate;
     }
 }

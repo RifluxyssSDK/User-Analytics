@@ -1,7 +1,6 @@
 package android.statistics.optimizer;
 
 import android.Util;
-import android.statistics.dataBase.Dao;
 import android.statistics.dataBase.Schema;
 import android.statistics.kernel.Instance;
 
@@ -9,7 +8,7 @@ import android.statistics.kernel.Instance;
  * The type Log factory.
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class LogFactory {
+public class LogFactory extends Instance {
 
     /**
      * Delete expiry logs.
@@ -18,11 +17,9 @@ public class LogFactory {
 
         new Thread(() -> {
 
-            Dao dao = Instance.getDao();
-
-            for (Schema schema : dao.getAllScheme()) {
-                if (Util.dateCompare(schema.getExpiryDate()) <= 0) {
-                    dao.delete(schema);
+            for (Schema schema : getInstance().getDao().getAllScheme()) {
+                if (Util.dateCompare(schema.getLogEntryDate()) <= 0) {
+                    getInstance().getDao().delete(schema);
                 }
             }
 

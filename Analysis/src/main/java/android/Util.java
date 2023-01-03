@@ -1,6 +1,7 @@
 package android;
 
 import android.annotation.SuppressLint;
+import android.statistics.kernel.Instance;
 import android.text.format.DateFormat;
 import android.util.Log;
 
@@ -15,7 +16,7 @@ import java.util.Objects;
  * The type Util.
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class Util {
+public class Util extends Instance {
 
     /**
      * Gets date.
@@ -43,17 +44,17 @@ public class Util {
     /**
      * Date compare int.
      *
-     * @param expiryDate  the expiry date
+     * @param entryDate  the entry date
      * @return the int
      */
-    public static int dateCompare(String expiryDate) {
+    public static int dateCompare(String entryDate) {
 
         try {
 
             @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
-            Date startDate = simpleDateFormat.parse(getDate(0));
-            Date endDate = simpleDateFormat.parse(expiryDate);
+            Date startDate = simpleDateFormat.parse(entryDate);
+            Date endDate = simpleDateFormat.parse(getDate(getInstance().getLogExpireDayCount()));
 
             long different = Objects.requireNonNull(endDate).getTime() - Objects.requireNonNull(startDate).getTime();
 
@@ -73,10 +74,7 @@ public class Util {
 
             long elapsedSeconds = different / secondsInMilli;
 
-            Log.i("Analytics days ", elapsedDays + "");
-            Log.i("Analytics hours ", elapsedHours + "");
-            Log.i("Analytics minutes ", elapsedMinutes + "");
-            Log.i("Analytics seconds ", elapsedSeconds + "");
+            Log.i("DATE", "" + elapsedDays );
 
             return (int) elapsedDays;
 

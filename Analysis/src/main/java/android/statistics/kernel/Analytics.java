@@ -11,24 +11,26 @@ import java.util.List;
  * The type Analytics.
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class Analytics {
+public class Analytics extends Instance {
 
     /**
      * Init.
      *
-     * @param context           the context
-     * @param logExpireDayCount the log expire day count
+     * @param mContext           the context
+     * @param mLogExpireDayCount the log expire day count
+     *
+     * Remark:
+     * <OL>
+     * <BR>
+     * <LI>Store the given data's as static variable.
+     * <LI>Initiating database.
+     * <LI>Delete expired logs on local database.
+     * </OL><BR>
      */
-    public static void init(Context context, int logExpireDayCount) {
-
-        // Store the given data's as static variable
-        Instance.setContext(context.getApplicationContext());
-        Instance.setLogExpireDayCount(logExpireDayCount);
-
-        // Initiating database
-        Instance.setDao(Database.getInstance().dao());
-
-        // Delete expired logs on local database
+    public static void init(Context mContext, int mLogExpireDayCount) {
+        getInstance().setContext(mContext);
+        getInstance().setLogExpireDayCount(mLogExpireDayCount);
+        getInstance().setDao(Database.getInstance().dao());
         LogFactory.deleteExpiryLogs();
     }
 
@@ -38,10 +40,10 @@ public class Analytics {
      * @param schema the schema
      */
     public static void insertLog(Schema schema) {
-        if (Instance.getContext() != null) {
-            Instance.getDao().insert(schema);
+        if (getInstance().getContext() != null) {
+            getInstance().getDao().insert(schema);
         } else {
-            throw new NullPointerException("You have been must call 'init' method on Analytics or Null Context");
+            throw new NullPointerException("You have been must call 'init' method before inserting Log's or Null Context");
         }
     }
 
@@ -51,6 +53,6 @@ public class Analytics {
      * @return the logs
      */
     public static List<Schema> getLogs() {
-        return Instance.getDao().getAllScheme();
+        return getInstance().getDao().getAllScheme();
     }
 }
