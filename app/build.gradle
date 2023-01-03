@@ -33,11 +33,12 @@ dependencies {
     //noinspection GradleDependency
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation project(path: ':Analysis')
+
     //noinspection GradleDynamicVersion
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
-    
+    implementation project(path: ':Analysis')
+//    implementation 'com.github.RifluxyssSDK:User-Analytics:1.0.1.0'
 }
