@@ -1,23 +1,20 @@
 package android.statistics.dataBase;
 
 import android.annotation.SuppressLint;
-import android.icu.text.SimpleDateFormat;
-import android.os.Build;
 import android.statistics.kernel.Instance;
 import android.provider.Settings;
+import android.text.format.DateFormat;
 
-import androidx.annotation.RequiresApi;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.Calendar;
+import java.util.Date;
 
 /**
  * The type Schema.
  */
 @Entity(tableName = "DataBase")
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class Schema {
 
     @ColumnInfo(name = "ID")
@@ -52,9 +49,8 @@ public class Schema {
     @ColumnInfo(name = "Device ID")
     private String deviceId = Settings.Secure.getString(Instance.getInstance().getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
-    @SuppressLint("SimpleDateFormat")
     @ColumnInfo(name = "Log Entry Date")
-    private String logEntryDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+    private String logEntryDate = String.valueOf(DateFormat.format("yyyy-MM-dd", new Date()));
 
     public Schema(String userId, String hostId, String locationNumber, Number routeNumber, String logger, String eventNumber, String additionalDescription, Number additionalNumber) {
         this.userId = userId;
