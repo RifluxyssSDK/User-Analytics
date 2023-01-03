@@ -16,6 +16,11 @@ public class Instance {
 
     private static Instance instance;
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static synchronized Instance getInstance() {
         if (instance == null) {
             instance = new Instance();
@@ -23,26 +28,56 @@ public class Instance {
         return instance;
     }
 
+    /**
+     * Gets dao.
+     *
+     * @return the dao
+     */
     public Dao getDao() {
         return dao;
     }
 
+    /**
+     * Sets dao.
+     *
+     * @param dao the dao
+     */
     public void setDao(Dao dao) {
         this.dao = dao;
     }
 
+    /**
+     * Gets context.
+     *
+     * @return the context
+     */
     public Context getContext() {
         return context;
     }
 
+    /**
+     * Sets context.
+     *
+     * @param context the context
+     */
     public void setContext(Context context) {
         this.context = context;
     }
 
+    /**
+     * Gets log expire day count.
+     *
+     * @return the log expire day count
+     */
     public int getLogExpireDayCount() {
         return logExpireDayCount;
     }
 
+    /**
+     * Sets log expire day count.
+     *
+     * @param logExpireDayCount the log expire day count
+     */
     public void setLogExpireDayCount(int logExpireDayCount) {
         this.logExpireDayCount = logExpireDayCount;
     }

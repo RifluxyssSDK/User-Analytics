@@ -20,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
 
         Analytics.insertLog(new Schema("userID","hostID",2.00,"log","eventNBR","assDES","addNBR"));
         Analytics.insertLog(new Schema("userID","hostID",1.00,"log","eventNBR","assDES","addNBR"));
+        Analytics.insertLog(new Schema("userID","hostID",1.00,"log","eventNBR","assDES","addNBR"));
+        Analytics.insertLog(new Schema("userID","hostID",1.00,"log","eventNBR","assDES","addNBR"));
+        Analytics.insertLog(new Schema("userID","hostID",1.00,"log","eventNBR","assDES","addNBR"));
+        Analytics.insertLog(new Schema("userID","hostID",1.00,"log","eventNBR","assDES","addNBR"));
 
         List<Schema> schemas = Analytics.getLogs();
         Log.i("TAG", "onCreate: ");

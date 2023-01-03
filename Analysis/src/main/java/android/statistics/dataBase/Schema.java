@@ -1,6 +1,7 @@
 package android.statistics.dataBase;
 
 import android.Util;
+import android.annotation.SuppressLint;
 import android.statistics.kernel.Instance;
 import android.provider.Settings;
 
@@ -11,7 +12,6 @@ import androidx.room.PrimaryKey;
 /**
  * The type Schema.
  */
-@SuppressWarnings({"unused", "UnusedReturnValue", "HardwareIds"})
 @Entity(tableName = "DataBase")
 public class Schema {
 
@@ -40,6 +40,7 @@ public class Schema {
     @ColumnInfo(name = "Additional Number")
     private final String additionalNumber;
 
+    @SuppressLint("HardwareIds")
     @ColumnInfo(name = "Device ID")
     private String deviceId = Settings.Secure.getString(Instance.getInstance().getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 

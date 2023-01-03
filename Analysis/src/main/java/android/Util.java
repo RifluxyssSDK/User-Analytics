@@ -74,7 +74,7 @@ public class Util extends Instance {
 
             long elapsedSeconds = different / secondsInMilli;
 
-            Log.i("DATE", "" + elapsedDays );
+            Log.i("DATE", "" + elapsedDays);
 
             return (int) elapsedDays;
 
