@@ -1,18 +1,23 @@
 package android.statistics.dataBase;
 
-import android.Util;
 import android.annotation.SuppressLint;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.statistics.kernel.Instance;
 import android.provider.Settings;
 
+import androidx.annotation.RequiresApi;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import java.util.Calendar;
 
 /**
  * The type Schema.
  */
 @Entity(tableName = "DataBase")
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class Schema {
 
     @ColumnInfo(name = "ID")
@@ -25,8 +30,11 @@ public class Schema {
     @ColumnInfo(name = "Host Id")
     private final String hostId;
 
+    @ColumnInfo(name = "Location Number")
+    private final String locationNumber;
+
     @ColumnInfo(name = "Route Number")
-    private final Double routeNumber;
+    private final Number routeNumber;
 
     @ColumnInfo(name = "Logger")
     private final String logger;
@@ -38,29 +46,20 @@ public class Schema {
     private final String additionalDescription;
 
     @ColumnInfo(name = "Additional Number")
-    private final String additionalNumber;
+    private final Number additionalNumber;
 
     @SuppressLint("HardwareIds")
     @ColumnInfo(name = "Device ID")
     private String deviceId = Settings.Secure.getString(Instance.getInstance().getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
+    @SuppressLint("SimpleDateFormat")
     @ColumnInfo(name = "Log Entry Date")
-    private String logEntryDate = Util.getDate(0);
+    private String logEntryDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
-    /**
-     * Instantiates a new Schema.
-     *
-     * @param userId                the user id
-     * @param hostId                the host id
-     * @param routeNumber           the route number
-     * @param logger                the logger
-     * @param eventNumber           the event number
-     * @param additionalDescription the additional description
-     * @param additionalNumber      the additional number
-     */
-    public Schema(String userId, String hostId, Double routeNumber, String logger, String eventNumber, String additionalDescription, String additionalNumber) {
+    public Schema(String userId, String hostId, String locationNumber, Number routeNumber, String logger, String eventNumber, String additionalDescription, Number additionalNumber) {
         this.userId = userId;
         this.hostId = hostId;
+        this.locationNumber = locationNumber;
         this.routeNumber = routeNumber;
         this.logger = logger;
         this.eventNumber = eventNumber;
@@ -84,7 +83,11 @@ public class Schema {
         return hostId;
     }
 
-    public Double getRouteNumber() {
+    public String getLocationNumber() {
+        return locationNumber;
+    }
+
+    public Number getRouteNumber() {
         return routeNumber;
     }
 
@@ -100,7 +103,7 @@ public class Schema {
         return additionalDescription;
     }
 
-    public String getAdditionalNumber() {
+    public Number getAdditionalNumber() {
         return additionalNumber;
     }
 
@@ -108,12 +111,12 @@ public class Schema {
         return deviceId;
     }
 
-    public String getLogEntryDate() {
-        return logEntryDate;
-    }
-
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
+    }
+
+    public String getLogEntryDate() {
+        return logEntryDate;
     }
 
     public void setLogEntryDate(String logEntryDate) {

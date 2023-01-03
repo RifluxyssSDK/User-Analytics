@@ -1,13 +1,16 @@
 package android.statistics.optimizer;
 
-import android.Util;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.statistics.dataBase.Schema;
 import android.statistics.kernel.Instance;
+
+import java.util.Calendar;
 
 /**
  * The type Log factory.
  */
-@SuppressWarnings({"unused", "UnusedReturnValue"})
+@SuppressWarnings({"unused,UnusedReturnValue,SimpleDateFormat"})
 public class LogFactory extends Instance {
 
     /**
@@ -15,14 +18,13 @@ public class LogFactory extends Instance {
      */
     public static void deleteExpiryLogs() {
 
-        new Thread(() -> {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -(getInstance().getLogExpireDayCount()));
 
-            for (Schema schema : getInstance().getDao().getAllScheme()) {
-                if (Util.dateCompare(schema.getLogEntryDate()) <= 0) {
-                    getInstance().getDao().delete(schema);
-                }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            for (Schema schema : getInstance().getDao().getExpireLog(new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime()))) {
+                getInstance().getDao().delete(schema);
             }
-
-        }).start();
+        }
     }
 }
