@@ -1,20 +1,11 @@
 package com.example.analytics;
 
-import android.icu.text.SimpleDateFormat;
-import android.os.Build;
 import android.os.Bundle;
 import android.statistics.dataBase.Schema;
 import android.statistics.kernel.Analytics;
-import android.text.format.DateFormat;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        List<Schema> list = Analytics.getLogs();
         Log.i("TAG", "onCreate: ");
     }
 }
