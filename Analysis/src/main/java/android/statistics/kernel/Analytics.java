@@ -18,10 +18,8 @@ public class Analytics extends Instance {
      *
      * @param mContext           the context
      * @param mLogExpireDayCount the log expire day count
-     *
-     * Remark:
-     * <OL>
-     * <BR>
+     * <p> Remark:
+     * <OL><BR>
      * <LI>Store the given data's as static variable.
      * <LI>Initiating database.
      * <LI>Delete expired logs on local database.
@@ -31,7 +29,7 @@ public class Analytics extends Instance {
         getInstance().setContext(mContext);
         getInstance().setLogExpireDayCount(mLogExpireDayCount);
         getInstance().setDao(Database.getInstance().dao());
-        LogFactory.deleteExpiryLogs();
+//        LogFactory.deleteExpiryLogs();
     }
 
     /**
@@ -40,11 +38,9 @@ public class Analytics extends Instance {
      * @param schema the schema
      */
     public static void insertLog(Schema schema) {
-        if (getInstance().getContext() != null) {
+        if (authentication())
             getInstance().getDao().insert(schema);
-        } else {
-            throw new NullPointerException("You have been must call 'init' method before inserting Log's or Null Context");
-        }
+
     }
 
     /**
@@ -53,6 +49,22 @@ public class Analytics extends Instance {
      * @return the logs
      */
     public static List<Schema> getLogs() {
-        return getInstance().getDao().getAllScheme();
+        return authentication() ? getInstance().getDao().getAllScheme() : null;
+    }
+
+    /**
+     * Delete all.
+     */
+    public static void deleteAll() {
+        if (authentication())
+            getInstance().getDao().deleteAllScheme();
+    }
+
+    private static boolean authentication() {
+        if (getInstance().getContext() != null) {
+            return true;
+        } else {
+            throw new NullPointerException("You have been must call 'init' method before inserting Log's or Null Context");
+        }
     }
 }

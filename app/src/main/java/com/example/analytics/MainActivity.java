@@ -20,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
             Analytics.insertLog(new Schema("userID","hostID","locationNumber",100.8957,"log","eventNBR","assDES",123));
         }
 
+        Analytics.getLogs();
+
+        Analytics.deleteAll();
+
         Log.i("TAG", "onCreate: ");
     }
 }
