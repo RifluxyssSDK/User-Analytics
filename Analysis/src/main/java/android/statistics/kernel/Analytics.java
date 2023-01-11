@@ -55,7 +55,7 @@ public class Analytics extends Instance {
         if (getInstance().getContext() != null) {
             return true;
         } else {
-            throw new NullPointerException("You have been must call 'init' method before inserting Log's or Null Context");
+            throw new NullPointerException("You have been must call 'init' method to initialize analytics library or Null Context");
         }
     }
 
