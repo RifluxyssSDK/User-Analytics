@@ -9,8 +9,16 @@ import org.xmlpull.v1.XmlSerializer;
 import java.io.IOException;
 import java.io.StringWriter;
 
+/**
+ * The type Xml builder.
+ */
 public class XmlBuilder extends Instance {
 
+    /**
+     * Init string.
+     *
+     * @return the string
+     */
     public String init() {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -22,6 +30,11 @@ public class XmlBuilder extends Instance {
         return stringBuilder.toString();
     }
 
+    /**
+     * Build string.
+     *
+     * @return the string
+     */
     private String build(Schema schema) {
 
         try {
