@@ -35,6 +35,7 @@ required values and that's all you done!...
 ### Technologies we used
 
 * Java 8
+* RetrofitAPI
 * Room Database
 * Exception Handling
 
