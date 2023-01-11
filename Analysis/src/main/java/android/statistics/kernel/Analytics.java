@@ -35,7 +35,6 @@ public class Analytics extends Instance {
      */
     public static void insertLog(@NonNull final Schema schema) {
         if (authentication()) getInstance().getDao().insert(schema);
-
     }
 
     /**
