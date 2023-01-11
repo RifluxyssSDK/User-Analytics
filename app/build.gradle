@@ -40,5 +40,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
     implementation project(path: ':Analysis')
-//    implementation 'com.github.RifluxyssSDK:User-Analytics:1.0.1.0'
+//    implementation 'com.github.RifluxyssSDK:User-Analytics:1.0.1.2'
 }

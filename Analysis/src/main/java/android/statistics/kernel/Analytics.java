@@ -1,21 +1,13 @@
 package android.statistics.kernel;
 
 import android.content.Context;
+import android.statistics.api.Api;
 import android.statistics.api.ResponseCallback;
-import android.statistics.api.RetrofitAPI;
 import android.statistics.dataBase.Database;
 import android.statistics.dataBase.Schema;
 
-import androidx.annotation.NonNull;
-
+import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * The type Analytics.
@@ -70,32 +62,10 @@ public class Analytics extends Instance {
     /**
      * Upload data.
      *
-     * @param xml      the xml
      * @param callback the callback
+     * @throws IOException the io exception
      */
-    public static void uploadData(String xml , ResponseCallback callback) {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://cpas100.na.cintas.com/")
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        RetrofitAPI retrofitCall = retrofit.create(RetrofitAPI.class);
-        Call<String> call = retrofitCall.uploadLogs(xml);
-
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> res) {
-                if (res.isSuccessful()) {
-                    callback.onSuccess(res.message());
-                } else {
-                    callback.onError(res.message());
-                }
-            }
-            @Override
-            public void onFailure(@NonNull Call<String> call, @NonNull Throwable throwable) {
-                callback.onError(Objects.requireNonNull(throwable.getLocalizedMessage()));
-            }
-        });
+    public static void uploadData(ResponseCallback callback) throws IOException {
+        new Api().init(callback);
     }
 }
