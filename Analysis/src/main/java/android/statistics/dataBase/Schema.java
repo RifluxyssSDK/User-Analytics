@@ -1,7 +1,5 @@
 package android.statistics.dataBase;
 
-import android.annotation.SuppressLint;
-import android.provider.Settings;
 import android.statistics.kernel.Instance;
 import android.text.format.DateFormat;
 
@@ -53,9 +51,8 @@ public class Schema {
     @ColumnInfo(name = "AdditionalNumber")
     private final Number additionalNumber;
 
-    @SuppressLint("HardwareIds")
     @ColumnInfo(name = "DeviceID")
-    private String deviceID = Settings.Secure.getString(Instance.getInstance().getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+    private String deviceID = Instance.getInstance().getDeviceId();
 
     /**
      * Instantiates a new Schema.

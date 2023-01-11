@@ -1,6 +1,6 @@
 package android.statistics.dataBase;
 
-import android.statistics.kernel.Instance;
+import android.content.Context;
 import android.utility.RoomTypeConverter;
 
 import androidx.room.Room;
@@ -28,9 +28,9 @@ public abstract class Database extends RoomDatabase {
      *
      * @return the instance
      */
-    public static synchronized Database getInstance() {
+    public static synchronized Database getInstance(Context context) {
         if (database == null) {
-            database = Room.databaseBuilder(Instance.getInstance().getContext(), Database.class, "Database").allowMainThreadQueries().build();
+            database = Room.databaseBuilder(context, Database.class, "Database").allowMainThreadQueries().build();
         }
         return database;
     }

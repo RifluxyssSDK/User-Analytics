@@ -3,7 +3,6 @@ package android.statistics.kernel;
 import android.content.Context;
 import android.statistics.api.Api;
 import android.statistics.api.ResponseCallback;
-import android.statistics.dataBase.Database;
 import android.statistics.dataBase.Schema;
 import android.utility.XmlBuilder;
 
@@ -19,12 +18,14 @@ public class Analytics extends Instance {
 
     /**
      * Init.
+     * <p>
+     * Context used to create DAO Object for
+     * store schema's on local database
      *
      * @param mContext the m context
      */
     public static void init(@NonNull final Context mContext) {
-        getInstance().setContext(mContext);
-        getInstance().setDao(Database.getInstance().dao());
+        getInstance().initArgs(mContext);
     }
 
     /**
@@ -63,7 +64,7 @@ public class Analytics extends Instance {
     }
 
     private static boolean authentication() {
-        if (getInstance().getContext() != null) {
+        if (getInstance().getDao() != null) {
             return true;
         } else {
             throw new NullPointerException("You have been must call 'init' method to initialize analytics library or Null Context");
