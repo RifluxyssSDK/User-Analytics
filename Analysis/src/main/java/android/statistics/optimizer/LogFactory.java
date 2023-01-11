@@ -18,10 +18,10 @@ public class LogFactory extends Instance {
     public static void deleteExpiryLogs() {
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, -(getInstance().getLogExpireDayCount()));
+//        calendar.add(Calendar.DATE, -(getInstance().getLogExpireDayCount()));
 
-        for (Schema schema : getInstance().getDao().getExpireLog(String.valueOf(DateFormat.format("yyyy-MM-dd", calendar)))) {
-            getInstance().getDao().delete(schema);
-        }
+//        for (Schema schema : getInstance().getDao().getExpireLog(String.valueOf(DateFormat.format("yyyy-MM-dd", calendar)))) {
+//            getInstance().getDao().delete(schema);
+//        }
     }
 }

@@ -42,13 +42,4 @@ public interface Dao {
      */
     @Query("SELECT * FROM `DataBase`")
     List<Schema> getAllScheme();
-
-    /**
-     * Gets expire log.
-     *
-     * @param date the date
-     * @return the expire log
-     */
-    @Query("SELECT * FROM `DataBase` WHERE `Log Entry Date`<:date")
-    List<Schema> getExpireLog(String date);
 }

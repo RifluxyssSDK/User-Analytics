@@ -1,19 +1,21 @@
 package android.statistics.dataBase;
 
 import android.annotation.SuppressLint;
-import android.statistics.kernel.Instance;
 import android.provider.Settings;
+import android.statistics.kernel.Instance;
 import android.text.format.DateFormat;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
  * The type Schema.
  */
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 @Entity(tableName = "DataBase")
 public class Schema {
 
@@ -21,42 +23,45 @@ public class Schema {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    @ColumnInfo(name = "User Id")
-    private final String userId;
+    @ColumnInfo(name = "EventTime")
+    private String eventTime = String.valueOf(DateFormat.format("yyyy/MM/dd HH:mm:ss aa", new Date()));
 
-    @ColumnInfo(name = "Host Id")
+    @ColumnInfo(name = "HostId")
     private final String hostId;
 
-    @ColumnInfo(name = "Location Number")
+    @ColumnInfo(name = "UserId")
+    private final String userId;
+
+    @ColumnInfo(name = "LocationNumber")
     private final String locationNumber;
 
-    @ColumnInfo(name = "Route Number")
+    @ColumnInfo(name = "RouteNumber")
     private final Number routeNumber;
+
+    @ColumnInfo(name = "Day")
+    private Number day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 
     @ColumnInfo(name = "Logger")
     private final String logger;
 
-    @ColumnInfo(name = "Event Number")
+    @ColumnInfo(name = "EventNumber")
     private final String eventNumber;
 
-    @ColumnInfo(name = "Additional Description")
+    @ColumnInfo(name = "AdditionalDescription")
     private final String additionalDescription;
 
-    @ColumnInfo(name = "Additional Number")
+    @ColumnInfo(name = "AdditionalNumber")
     private final Number additionalNumber;
 
     @SuppressLint("HardwareIds")
-    @ColumnInfo(name = "Device ID")
-    private String deviceId = Settings.Secure.getString(Instance.getInstance().getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-
-    @ColumnInfo(name = "Log Entry Date")
-    private String logEntryDate = String.valueOf(DateFormat.format("yyyy-MM-dd", new Date()));
+    @ColumnInfo(name = "DeviceID")
+    private String deviceID = Settings.Secure.getString(Instance.getInstance().getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
     /**
      * Instantiates a new Schema.
      *
-     * @param userId                the user id
      * @param hostId                the host id
+     * @param userId                the user id
      * @param locationNumber        the location number
      * @param routeNumber           the route number
      * @param logger                the logger
@@ -64,9 +69,9 @@ public class Schema {
      * @param additionalDescription the additional description
      * @param additionalNumber      the additional number
      */
-    public Schema(String userId, String hostId, String locationNumber, Number routeNumber, String logger, String eventNumber, String additionalDescription, Number additionalNumber) {
-        this.userId = userId;
+    public Schema(String hostId, String userId, String locationNumber, Number routeNumber, String logger, String eventNumber, String additionalDescription, Number additionalNumber) {
         this.hostId = hostId;
+        this.userId = userId;
         this.locationNumber = locationNumber;
         this.routeNumber = routeNumber;
         this.logger = logger;
@@ -94,12 +99,12 @@ public class Schema {
     }
 
     /**
-     * Gets user id.
+     * Gets event time.
      *
-     * @return the user id
+     * @return the event time
      */
-    public String getUserId() {
-        return userId;
+    public String getEventTime() {
+        return eventTime;
     }
 
     /**
@@ -109,6 +114,15 @@ public class Schema {
      */
     public String getHostId() {
         return hostId;
+    }
+
+    /**
+     * Gets user id.
+     *
+     * @return the user id
+     */
+    public String getUserId() {
+        return userId;
     }
 
     /**
@@ -127,6 +141,15 @@ public class Schema {
      */
     public Number getRouteNumber() {
         return routeNumber;
+    }
+
+    /**
+     * Gets day.
+     *
+     * @return the day
+     */
+    public Number getDay() {
+        return day;
     }
 
     /**
@@ -166,38 +189,38 @@ public class Schema {
     }
 
     /**
+     * Sets event time.
+     *
+     * @param eventTime the event time
+     */
+    public void setEventTime(String eventTime) {
+        this.eventTime = eventTime;
+    }
+
+    /**
+     * Sets day.
+     *
+     * @param day the day
+     */
+    public void setDay(Number day) {
+        this.day = day;
+    }
+
+    /**
      * Gets device id.
      *
      * @return the device id
      */
-    public String getDeviceId() {
-        return deviceId;
+    public String getDeviceID() {
+        return deviceID;
     }
 
     /**
      * Sets device id.
      *
-     * @param deviceId the device id
+     * @param deviceID the device id
      */
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    /**
-     * Gets log entry date.
-     *
-     * @return the log entry date
-     */
-    public String getLogEntryDate() {
-        return logEntryDate;
-    }
-
-    /**
-     * Sets log entry date.
-     *
-     * @param logEntryDate the log entry date
-     */
-    public void setLogEntryDate(String logEntryDate) {
-        this.logEntryDate = logEntryDate;
+    public void setDeviceID(String deviceID) {
+        this.deviceID = deviceID;
     }
 }

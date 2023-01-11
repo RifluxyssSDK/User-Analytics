@@ -12,8 +12,6 @@ public class Instance {
 
     private Context context;
 
-    private int logExpireDayCount;
-
     private static Instance instance;
 
     /**
@@ -62,23 +60,5 @@ public class Instance {
      */
     public void setContext(Context context) {
         this.context = context;
-    }
-
-    /**
-     * Gets log expire day count.
-     *
-     * @return the log expire day count
-     */
-    public int getLogExpireDayCount() {
-        return logExpireDayCount;
-    }
-
-    /**
-     * Sets log expire day count.
-     *
-     * @param logExpireDayCount the log expire day count
-     */
-    public void setLogExpireDayCount(int logExpireDayCount) {
-        this.logExpireDayCount = logExpireDayCount;
     }
 }

@@ -1,11 +1,21 @@
 package android.statistics.kernel;
 
+import android.content.Context;
+import android.statistics.api.ResponseCallback;
+import android.statistics.api.RetrofitAPI;
 import android.statistics.dataBase.Database;
 import android.statistics.dataBase.Schema;
-import android.statistics.optimizer.LogFactory;
-import android.content.Context;
+
+import androidx.annotation.NonNull;
 
 import java.util.List;
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * The type Analytics.
@@ -16,20 +26,11 @@ public class Analytics extends Instance {
     /**
      * Init.
      *
-     * @param mContext           the context
-     * @param mLogExpireDayCount the log expire day count
-     * <p> Remark:
-     * <OL><BR>
-     * <LI>Store the given data's as static variable.
-     * <LI>Initiating database.
-     * <LI>Delete expired logs on local database.
-     * </OL><BR>
+     * @param mContext the m context
      */
-    public static void init(Context mContext, int mLogExpireDayCount) {
+    public static void init(Context mContext) {
         getInstance().setContext(mContext);
-        getInstance().setLogExpireDayCount(mLogExpireDayCount);
         getInstance().setDao(Database.getInstance().dao());
-//        LogFactory.deleteExpiryLogs();
     }
 
     /**
@@ -38,8 +39,7 @@ public class Analytics extends Instance {
      * @param schema the schema
      */
     public static void insertLog(Schema schema) {
-        if (authentication())
-            getInstance().getDao().insert(schema);
+        if (authentication()) getInstance().getDao().insert(schema);
 
     }
 
@@ -56,8 +56,7 @@ public class Analytics extends Instance {
      * Delete all.
      */
     public static void deleteAll() {
-        if (authentication())
-            getInstance().getDao().deleteAllScheme();
+        if (authentication()) getInstance().getDao().deleteAllScheme();
     }
 
     private static boolean authentication() {
@@ -66,5 +65,37 @@ public class Analytics extends Instance {
         } else {
             throw new NullPointerException("You have been must call 'init' method before inserting Log's or Null Context");
         }
+    }
+
+    /**
+     * Upload data.
+     *
+     * @param xml      the xml
+     * @param callback the callback
+     */
+    public static void uploadData(String xml , ResponseCallback callback) {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://cpas100.na.cintas.com/")
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+
+        RetrofitAPI retrofitCall = retrofit.create(RetrofitAPI.class);
+        Call<String> call = retrofitCall.uploadLogs(xml);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> res) {
+                if (res.isSuccessful()) {
+                    callback.onSuccess(res.message());
+                } else {
+                    callback.onError(res.message());
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable throwable) {
+                callback.onError(Objects.requireNonNull(throwable.getLocalizedMessage()));
+            }
+        });
     }
 }
