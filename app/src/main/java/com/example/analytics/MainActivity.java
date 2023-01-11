@@ -25,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(@NonNull String message) {
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
+
             @Override
-            public void onError(@NonNull String message) {
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+            public void onError(@NonNull String error) {
+                Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
             }
         });
     }
