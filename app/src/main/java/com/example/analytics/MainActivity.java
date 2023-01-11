@@ -9,8 +9,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -22,15 +20,11 @@ public class MainActivity extends AppCompatActivity {
 
         Analytics.insertLog(new Schema("Mukesh", "hostID", "locationNumber", 100.8957, "PRC Test", "eventNBR", "assDES", 123));
 
-        String xml = Analytics.getLogListAsString();
-        List<Schema> list = Analytics.getLogList();
-
         Analytics.uploadData(new ResponseCallback() {
             @Override
             public void onSuccess(@NonNull String message) {
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onError(@NonNull String message) {
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
