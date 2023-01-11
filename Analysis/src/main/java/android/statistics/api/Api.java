@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import java.util.Objects;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,8 +29,12 @@ public class Api extends Instance {
 
         String xmlString = new XmlBuilder().init();
 
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(chain -> chain.proceed(chain.request().newBuilder().addHeader("parameter", "value").build()));
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
+                .client(httpClient.build())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
