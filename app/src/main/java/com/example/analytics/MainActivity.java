@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
         Analytics.init(getApplicationContext());
 
-        for (int i = 1; i <= 10000; i++) {
-            Analytics.insertLog(new Schema(i+"Mukesh", "hostID", "locationNumber", 100.8957, "PRC Test", "eventNBR", "assDES", 123));
-        }
+//        for (int i = 1; i <= 10; i++) {
+//            Analytics.insertLog(new Schema(i+"Mukesh", "hostID", "locationNumber", 100.8957, "PRC Test", "eventNBR", "assDES", 123));
+//        }
 
         try {
 

@@ -1,5 +1,6 @@
 package android.statistics.api;
 
+import android.statistics.kernel.Instance;
 import android.utility.Constants;
 import android.utility.XmlBuilder;
 
@@ -17,7 +18,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 /**
  * The type Api.
  */
-public class Api {
+public class Api extends Instance {
 
     /**
      * Init.
@@ -42,6 +43,7 @@ public class Api {
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> res) {
                 if (res.isSuccessful()) {
                     callback.onSuccess(res.message());
+                    getInstance().getDao().deleteAllScheme();
                 } else {
                     callback.onError(res.message());
                 }
