@@ -30,23 +30,17 @@ public class MainActivity extends AppCompatActivity {
 //            Analytics.insertLog(new Schema(i+"Mukesh", "hostID", "locationNumber", 100.8957, "PRC Test", "eventNBR", "assDES", 123));
 //        }
 
-        try {
+        Analytics.uploadData(new ResponseCallback() {
+            @Override
+            public void onSuccess(@NonNull String message) {
+                Toast.makeText(getApplicationContext(), "Posted", Toast.LENGTH_LONG).show();
+            }
 
-            Analytics.uploadData(new ResponseCallback() {
-                @Override
-                public void onSuccess(@NonNull String message) {
-                    Toast.makeText(getApplicationContext(), "Posted", Toast.LENGTH_LONG).show();
-                }
-
-                @Override
-                public void onError(@NonNull String error) {
-                    Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
-                }
-            });
-
-        } catch (IOException e) {
-            Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-        }
+            @Override
+            public void onError(@NonNull String error) {
+                Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
+            }
+        });
 
         Log.i("TAG", "onCreate: ");
     }

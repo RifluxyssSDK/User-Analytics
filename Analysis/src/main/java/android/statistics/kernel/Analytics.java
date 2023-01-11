@@ -63,9 +63,8 @@ public class Analytics extends Instance {
      * Upload data.
      *
      * @param callback the callback
-     * @throws IOException the io exception
      */
-    public static void uploadData(ResponseCallback callback) throws IOException {
+    public static void uploadData(ResponseCallback callback) {
         if (authentication()) new Api().init(callback);
     }
 }

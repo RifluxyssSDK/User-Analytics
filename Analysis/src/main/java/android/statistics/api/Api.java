@@ -24,9 +24,8 @@ public class Api extends Instance {
      * Init.
      *
      * @param callback the callback
-     * @throws IOException the io exception
      */
-    public void init(ResponseCallback callback) throws IOException {
+    public void init(ResponseCallback callback) {
 
         String xmlString = new XmlBuilder().init();
 
