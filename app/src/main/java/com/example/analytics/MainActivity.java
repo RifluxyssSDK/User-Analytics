@@ -4,18 +4,10 @@ import android.os.Bundle;
 import android.statistics.api.ResponseCallback;
 import android.statistics.dataBase.Schema;
 import android.statistics.kernel.Analytics;
-import android.util.Log;
-import android.util.Xml;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.xmlpull.v1.XmlSerializer;
-
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,22 +18,18 @@ public class MainActivity extends AppCompatActivity {
 
         Analytics.init(getApplicationContext());
 
-//        for (int i = 1; i <= 10; i++) {
-//            Analytics.insertLog(new Schema(i+"Mukesh", "hostID", "locationNumber", 100.8957, "PRC Test", "eventNBR", "assDES", 123));
-//        }
+        Analytics.insertLog(new Schema("Mukesh", "hostID", "locationNumber", 100.8957, "PRC Test", "eventNBR", "assDES", 123));
 
         Analytics.uploadData(new ResponseCallback() {
             @Override
             public void onSuccess(@NonNull String message) {
-                Toast.makeText(getApplicationContext(), "Posted", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onError(@NonNull String error) {
-                Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
+            public void onError(@NonNull String message) {
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
-
-        Log.i("TAG", "onCreate: ");
     }
 }

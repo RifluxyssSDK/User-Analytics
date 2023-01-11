@@ -1,6 +1,5 @@
 package android.statistics.dataBase;
 
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -20,14 +19,6 @@ public interface Dao {
      */
     @Insert
     void insert(Schema schema);
-
-    /**
-     * Delete.
-     *
-     * @param schema the schema
-     */
-    @Delete
-    void delete(Schema schema);
 
     /**
      * Delete all scheme.

@@ -6,7 +6,6 @@ import android.utility.XmlBuilder;
 
 import androidx.annotation.NonNull;
 
-import java.io.IOException;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -52,6 +51,5 @@ public class Api extends Instance {
                 callback.onError(Objects.requireNonNull(throwable.getLocalizedMessage()));
             }
         });
-
     }
 }

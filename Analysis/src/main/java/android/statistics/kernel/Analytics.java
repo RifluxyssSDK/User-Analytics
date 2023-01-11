@@ -5,8 +5,10 @@ import android.statistics.api.Api;
 import android.statistics.api.ResponseCallback;
 import android.statistics.dataBase.Database;
 import android.statistics.dataBase.Schema;
+import android.utility.XmlBuilder;
 
-import java.io.IOException;
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 /**
@@ -20,7 +22,7 @@ public class Analytics extends Instance {
      *
      * @param mContext the m context
      */
-    public static void init(Context mContext) {
+    public static void init(@NonNull final Context mContext) {
         getInstance().setContext(mContext);
         getInstance().setDao(Database.getInstance().dao());
     }
@@ -30,18 +32,27 @@ public class Analytics extends Instance {
      *
      * @param schema the schema
      */
-    public static void insertLog(Schema schema) {
+    public static void insertLog(@NonNull final Schema schema) {
         if (authentication()) getInstance().getDao().insert(schema);
 
     }
 
     /**
-     * Gets logs.
+     * Gets log list.
      *
-     * @return the logs
+     * @return the log list
      */
-    public static List<Schema> getLogs() {
+    public static List<Schema> getLogList() {
         return authentication() ? getInstance().getDao().getAllScheme() : null;
+    }
+
+    /**
+     * Gets log list as string.
+     *
+     * @return the log list as string
+     */
+    public static String getLogListAsString() {
+        return authentication() ? new XmlBuilder().init() : null;
     }
 
     /**
@@ -64,7 +75,7 @@ public class Analytics extends Instance {
      *
      * @param callback the callback
      */
-    public static void uploadData(ResponseCallback callback) {
+    public static void uploadData(final ResponseCallback callback) {
         if (authentication()) new Api().init(callback);
     }
 }
