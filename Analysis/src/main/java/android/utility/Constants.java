@@ -5,6 +5,12 @@ package android.utility;
  */
 public interface Constants {
 
+
+    /**
+     * The constant nullErrorMessage.
+     */
+    String nullErrorMessage = "You been must call 'init' method on document to initialize library or Null Context";
+
     /**
      * The constant BASE_URL.
      */

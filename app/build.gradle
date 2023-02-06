@@ -29,10 +29,10 @@ android {
 
 dependencies {
 
+    //noinspection GradleDependency
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
-//    implementation project(path: ':Analysis')
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.github.RifluxyssSDK:User-Analytics:1.0.1.6'
+    implementation project(path: ':Analysis')
+//    implementation 'com.github.RifluxyssSDK:User-Analytics:1.0.1.6'
 }

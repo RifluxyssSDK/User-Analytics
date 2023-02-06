@@ -4,6 +4,7 @@ import android.content.Context;
 import android.statistics.api.Api;
 import android.statistics.api.ResponseCallback;
 import android.statistics.dataBase.Schema;
+import android.utility.Constants;
 import android.utility.XmlBuilder;
 
 import androidx.annotation.NonNull;
@@ -66,7 +67,7 @@ public class Analytics extends Instance {
         if (getInstance().getDao() != null) {
             return true;
         } else {
-            throw new NullPointerException("You have been must call 'init' method to initialize analytics library or Null Context");
+            throw new NullPointerException(Constants.nullErrorMessage);
         }
     }
 
