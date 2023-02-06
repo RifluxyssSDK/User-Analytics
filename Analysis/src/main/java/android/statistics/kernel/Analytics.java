@@ -15,7 +15,7 @@ import java.util.List;
  * The type Analytics.
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class Analytics extends Instance {
+public class Analytics {
 
     /**
      * Init.
@@ -26,7 +26,7 @@ public class Analytics extends Instance {
      * @param mContext the m context
      */
     public static void init(@NonNull final Context mContext) {
-        getInstance().initArgs(mContext);
+        Instance.getInstance().initArgs(mContext);
     }
 
     /**
@@ -35,7 +35,7 @@ public class Analytics extends Instance {
      * @param schema the schema
      */
     public static void insertLog(@NonNull final Schema schema) {
-        if (authentication()) getInstance().getDao().insert(schema);
+        if (authentication()) Instance.getInstance().getDao().insert(schema);
     }
 
     /**
@@ -44,7 +44,7 @@ public class Analytics extends Instance {
      * @return the log list
      */
     public static List<Schema> getLogList() {
-        return authentication() ? getInstance().getDao().getAllScheme() : null;
+        return authentication() ? Instance.getInstance().getDao().getAllScheme() : null;
     }
 
     /**
@@ -60,11 +60,11 @@ public class Analytics extends Instance {
      * Delete all.
      */
     public static void deleteAll() {
-        if (authentication()) getInstance().getDao().deleteAllScheme();
+        if (authentication()) Instance.getInstance().getDao().deleteAllScheme();
     }
 
     private static boolean authentication() {
-        if (getInstance().getDao() != null) {
+        if (Instance.getInstance().getDao() != null) {
             return true;
         } else {
             throw new NullPointerException(Constants.nullErrorMessage);
