@@ -25,7 +25,7 @@ public class Analytics {
      *
      * @param mContext the m context
      */
-    public static void init(@NonNull final Context mContext) {
+    public void init(@NonNull final Context mContext) {
         Instance.getInstance().initArgs(mContext);
     }
 
@@ -34,7 +34,7 @@ public class Analytics {
      *
      * @param schema the schema
      */
-    public static void insertLog(@NonNull final Schema schema) {
+    public void insertLog(@NonNull final Schema schema) {
         if (authentication()) Instance.getInstance().getDao().insert(schema);
     }
 
@@ -43,7 +43,7 @@ public class Analytics {
      *
      * @return the log list
      */
-    public static List<Schema> getLogList() {
+    public List<Schema> getLogList() {
         return authentication() ? Instance.getInstance().getDao().getAllScheme() : null;
     }
 
@@ -52,18 +52,18 @@ public class Analytics {
      *
      * @return the log list as string
      */
-    public static String getLogListAsString() {
+    public String getLogListAsString() {
         return authentication() ? new XmlBuilder().init() : null;
     }
 
     /**
      * Delete all.
      */
-    public static void deleteAll() {
+    public void deleteAll() {
         if (authentication()) Instance.getInstance().getDao().deleteAllScheme();
     }
 
-    private static boolean authentication() {
+    private boolean authentication() {
         if (Instance.getInstance().getDao() != null) {
             return true;
         } else {
@@ -76,7 +76,7 @@ public class Analytics {
      *
      * @param callback the callback
      */
-    public static void uploadData(final ResponseCallback callback) {
+    public void uploadData(final ResponseCallback callback) {
         if (authentication()) new Api().init(callback);
     }
 }

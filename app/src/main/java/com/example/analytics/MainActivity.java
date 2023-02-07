@@ -3,11 +3,14 @@ package com.example.analytics;
 import android.os.Bundle;
 import android.os.Handler;
 import android.statistics.api.ResponseCallback;
+import android.statistics.dataBase.Schema;
 import android.statistics.kernel.Analytics;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,11 +19,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Analytics.init(getBaseContext());
+        new Analytics().insertLog(new Schema("Mukesh", "hostID", "locationNumber", 100.8957, "PRC Test", "eventNBR", "assDES", 123));
 
-        /*Analytics.insertLog(new Schema("Mukesh", "hostID", "locationNumber", 100.8957, "PRC Test", "eventNBR", "assDES", 123));*/
+        List<Schema> schema = new Analytics().getLogList();
 
-        new Handler().post(() -> new Thread(() -> Analytics.uploadData(new ResponseCallback() {
+        String mData = new Analytics().getLogListAsString();
+
+        new Handler().post(() -> new Thread(() -> new Analytics().uploadData(new ResponseCallback() {
 
             @Override
             public void onSuccess(@NonNull String message) {
@@ -33,8 +38,5 @@ public class MainActivity extends AppCompatActivity {
             }
 
         })).start());
-
-
-
     }
 }
